@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat Anonim</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container" id="authPage">
+    <h1>Buat Nama Samaran</h1>
+    <input type="email" id="email" placeholder="Email kamu" />
+    <input type="text" id="username" placeholder="Nama Samaran" />
+    <button onclick="register()">Masuk Chat</button>
+    <p id="error" style="color: red; display: none;"></p>
+  </div>
+
+  <div class="container chat-container" id="chatPage" style="display: none;">
+    <h2>Selamat datang, <span id="welcomeUser"></span>!</h2>
+    <div id="chatBox"></div>
+    <div class="input-area">
+      <input type="text" id="messageInput" placeholder="Ketik pesan..." />
+      <button onclick="sendMessage()">Kirim</button>
+    </div>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyA03Pxd1mQ3mX6N1idpzOZF...",
+      authDomain: "chat-ku-12345.firebaseapp.com",
+      projectId: "chat-ku-12345",
+      storageBucket: "chat-ku-12345.appspot.com",
+      messagingSenderId: "441869436560",
+      appId: "1:441869436560:web:cafa8986da897c09e17a15"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    window.auth = auth;
+    window.db = db;
+  </script>
+
+  <!-- Script Utama -->
+  <script src="script.js" type="module"></script>
+</body>
+</html>
